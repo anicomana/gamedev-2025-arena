@@ -939,6 +939,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   botSpeed: 8
+  botRotationSpeed: 180
+  behindDistance: 2
+  distanceThreshold: 0.5
 --- !u!1 &709083392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1256,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   botSpeed: 10
+  botRotationSpeed: 180
+  behindDistance: 1.5
+  distanceThreshold: 0.3
 --- !u!1 &1030419121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +1878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600094305329251235, guid: 44ce9b47db089ca4b882eab6fb51ce40, type: 3}
       propertyPath: m_TagString
-      value: Bot
+      value: Red Player
       objectReference: {fileID: 0}
     - target: {fileID: 8184531754439873102, guid: 44ce9b47db089ca4b882eab6fb51ce40, type: 3}
       propertyPath: team
@@ -2044,7 +2050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600094305329251235, guid: 44ce9b47db089ca4b882eab6fb51ce40, type: 3}
       propertyPath: m_TagString
-      value: Bot
+      value: Blue Player
       objectReference: {fileID: 0}
     - target: {fileID: 8600777488204032783, guid: 44ce9b47db089ca4b882eab6fb51ce40, type: 3}
       propertyPath: m_LocalPosition.x
