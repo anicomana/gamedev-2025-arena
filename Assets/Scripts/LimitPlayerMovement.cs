@@ -6,6 +6,7 @@ public class LimitPlayerMovement : MonoBehaviour
     public float maxRotationSpeed = 180f; // degrees per second
     private Vector3 previousPosition;
     private Quaternion previousRotation;
+    private Rigidbody body;
 
     void Start()
     {        
@@ -13,8 +14,13 @@ public class LimitPlayerMovement : MonoBehaviour
         previousRotation = transform.rotation;
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
+        
+    }
+
+    void LateUpdate()
+    {        
         // Linear speed limit
         Vector3 currentPosition = transform.position;
         Vector3 deltaPosition = currentPosition - previousPosition;
