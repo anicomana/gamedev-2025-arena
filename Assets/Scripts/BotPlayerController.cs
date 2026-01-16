@@ -5,6 +5,7 @@ public class BotPlayerController : MonoBehaviour
 
 {
     public float botSpeed = 10f;
+    public float botRotationSpeed = 180f;
     private GameObject ball;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,7 +24,9 @@ public class BotPlayerController : MonoBehaviour
             dir.Normalize();
 
            if (dir != Vector3.zero) {
-                transform.Translate(dir * botSpeed * Time.deltaTime, Space.World);
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, botRotationSpeed + Time.deltaTime);
+                transform.Translate(Vector3.forward * botSpeed * Time.deltaTime); //Space.World serve per dare indicazioni su quale trasformate prendere riferimento.
             }
         }
 
