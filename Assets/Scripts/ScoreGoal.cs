@@ -5,7 +5,6 @@ public class ScoreGoal : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     private int score;
-    private Vector3 ballStartPosition = new Vector3(0, 3, 0);
 
     void Start()
     {
@@ -17,10 +16,10 @@ public class ScoreGoal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            Debug.Log("Goal scored in " + gameObject.name);
             score++;
+            Debug.Log("Goal #" + score + " scored in " + gameObject.name);
             UpdateScoreText();
-            collision.gameObject.transform.position = ballStartPosition;
+            collision.gameObject.GetComponent<RespawnIfNeeded>().Respawn();
         }
     }
 
