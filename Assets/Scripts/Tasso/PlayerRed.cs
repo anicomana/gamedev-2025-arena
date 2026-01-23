@@ -10,17 +10,16 @@ public class PlayerRed : MonoBehaviour
     public Transform PlayerBlue;
     public float avoidDistance = 1f;
     public float avoidForce = 5f;
-    
+
 
     public float kickForce = 10f;
 
     Rigidbody rb;
-    bool kicked = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
 
@@ -40,9 +39,9 @@ public class PlayerRed : MonoBehaviour
             avoidDir.y = 0f;
             avoidDir = avoidDir.normalized * avoidForce;
         }
-        
 
-       
+
+
 
         Vector3 kickPoint = ball.position - ballToGoal * behindballDistance;
         Vector3 toKickPoint = kickPoint - rb.position;
@@ -56,7 +55,7 @@ public class PlayerRed : MonoBehaviour
         }
         Vector3 finalDir = toKickPoint.normalized + avoidDir;
         finalDir = finalDir.normalized;
-        rb.MovePosition(rb.position + finalDir * speed * Time.fixedDeltaTime);   
+        rb.MovePosition(rb.position + finalDir * speed * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -70,7 +69,6 @@ public class PlayerRed : MonoBehaviour
             dir.y = 0f;
             dir = dir.normalized;
             ballRb.AddForce(dir * kickForce, ForceMode.Impulse);
-            kicked = true;
         }
     }
 

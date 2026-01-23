@@ -7,8 +7,12 @@ public class InputPlayerController : MonoBehaviour
 
     void Start()
     {
-        Camera.main.GetComponent<MoveCamera>().enabled = false;
-        Debug.LogWarning("InputPlayerController activated: Camera movement disabled");
+        MoveCamera moveCamera = Camera.main.GetComponent<MoveCamera>();
+        if (moveCamera.enabled)
+        {
+            Camera.main.GetComponent<MoveCamera>().enabled = false;
+            Debug.LogWarning("InputPlayerController activated: Camera movement disabled");
+        }
     }
 
     void Update()
