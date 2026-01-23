@@ -16,7 +16,7 @@ public class SpinningVanettiPlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 playerToBall = ball.transform.position - transform.position;
         playerToBall.y = 0; // Ignore vertical difference

@@ -38,8 +38,7 @@ public class SmartSpinningVanettiPlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 target;
         if (MustRunToDefendGoal())
