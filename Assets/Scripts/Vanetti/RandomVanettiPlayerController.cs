@@ -3,12 +3,13 @@ using UnityEngine;
 public class RandomVanettiPlayerController : MonoBehaviour
 {
     Vector3 direction;
-    public float speed = 5f;
-    public float changeDirectionInterval = 2f;
+    public float speed = 15f;
+    public float changeDirectionInterval = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GetComponent<Rigidbody>().isKinematic = true;
         float maxSpeed = GetComponent<LimitPlayerMovement>().maxSpeed;
         if (speed > maxSpeed)
         {
