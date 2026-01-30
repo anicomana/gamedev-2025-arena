@@ -6,39 +6,50 @@ public class LimitPlayerMovement : MonoBehaviour
     public float maxRotationSpeed = 180f; // degrees per second
     private Vector3 previousPosition;
     private Quaternion previousRotation;
+    private Rigidbody body;
 
     void Start()
     {        
+        body = GetComponent<Rigidbody>();
+
+        // Used for kinematic body
         previousPosition = transform.position;
         previousRotation = transform.rotation;
+
+        // Used for non-kinematic body
+        body.maxLinearVelocity = maxSpeed;
+        body.maxAngularVelocity = maxRotationSpeed * Mathf.Deg2Rad; // radians per second
     }
 
     void LateUpdate()
     {
-        // Linear speed limit
-        Vector3 currentPosition = transform.position;
-        Vector3 deltaPosition = currentPosition - previousPosition;
-        float speed = deltaPosition.magnitude / Time.deltaTime;
-        // If speed exceeds maxSpeed, limit the movement
-        if (speed > maxSpeed)
+        if (body.isKinematic)
         {
-            Vector3 limitedDeltaPosition = maxSpeed * Time.deltaTime * deltaPosition.normalized;
-            transform.position = previousPosition + limitedDeltaPosition;
-        }
-        // Update previous position for the next frame
-        previousPosition = transform.position;
+            // Linear speed limit
+            Vector3 currentPosition = transform.position;
+            Vector3 deltaPosition = currentPosition - previousPosition;
+            float speed = deltaPosition.magnitude / Time.deltaTime;
+            // If speed exceeds maxSpeed, limit the movement
+            if (speed > maxSpeed)
+            {
+                Vector3 limitedDeltaPosition = maxSpeed * Time.deltaTime * deltaPosition.normalized;
+                transform.position = previousPosition + limitedDeltaPosition;
+            }
+            // Update previous position for the next frame
+            previousPosition = transform.position;
 
-        // Angular speed limit
-        Quaternion currentRotation = transform.rotation;
-        float angle = Quaternion.Angle(previousRotation, currentRotation);
-        float rotationSpeed = angle / Time.deltaTime;
-        // If rotation speed exceeds maxRotationSpeed, limit the rotation
-        if (rotationSpeed > maxRotationSpeed)
-        {
-            float limitedAngle = maxRotationSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.RotateTowards(previousRotation, currentRotation, limitedAngle);
+            // Angular speed limit
+            Quaternion currentRotation = transform.rotation;
+            float angle = Quaternion.Angle(previousRotation, currentRotation);
+            float rotationSpeed = angle / Time.deltaTime;
+            // If rotation speed exceeds maxRotationSpeed, limit the rotation
+            if (rotationSpeed > maxRotationSpeed)
+            {
+                float limitedAngle = maxRotationSpeed * Time.deltaTime;
+                transform.rotation = Quaternion.RotateTowards(previousRotation, currentRotation, limitedAngle);
+            }
+            // Update previous rotation for the next frame
+            previousRotation = transform.rotation;
         }
-        // Update previous rotation for the next frame
-        previousRotation = transform.rotation;
     }
 }
